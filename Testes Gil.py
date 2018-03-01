@@ -9,7 +9,7 @@ def availableCar():
     for car in car_list:
         if (car[2] == False):
             return car[0]
-    return False
+    return "false"
 
 def AssignNextTrip(carNumber, tripNumber):
     for car in car_list:
@@ -21,11 +21,16 @@ def AssignNextTrip(carNumber, tripNumber):
                     return
             return
 
+def NextTripNumber(trips):
+    return trips.pop[0]
+
 tripNumber = 0
-while(availableCar()): #Verifies there is a car available
+while(availableCar() != "false"): #Verifies there is a car available
     car = availableCar()
+    tripNumber = NextTripNumber(trips)
     AssignNextTrip(car, tripNumber) #adicionar viagem, alterar valores dentro do carro
     tripNumber += 1
+
 
 
 print(output_file)
