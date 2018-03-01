@@ -13,12 +13,12 @@ def travel_distance(start, finish):
 
 
 def make_trip_list():
-    trip_list = list()
+    trips = list()
 
     for i in range(n_rides):
-        trip_list.append(str(i) + ' ' + input_file.readline().rstrip())
+        trips.append(str(i) + ' ' + input_file.readline().rstrip())
         # trip_list.append(''.join(str(x) for x in input_file.readline().rstrip()))
-    return trip_list
+    return trips
 
 
 # print(make_trip_list())
@@ -29,7 +29,7 @@ print(trip_list)
 #
 # print(input_file.readline())
 
-n_cars = 0
+# n_cars = 0
 fleet = []
 
 for r in range(n_rides):
@@ -38,7 +38,9 @@ for r in range(n_rides):
 
     begin = (begin_row, begin_col)
     end = (end_row, end_col)
-    
+
+
+
     # while current_step < max_steps:
     #     distance = travel_distance(begin, end)
     #
