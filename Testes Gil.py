@@ -1,4 +1,9 @@
-def travelDistance(start,finish):
-    return abs(start[0]-finish[0]) + abs(start [1]-finish[1])
+cars_list = []
 
-print(travelDistance((0, 0) , (1, 3)))
+number_of_cars = 12
+
+for car in range(0, number_of_cars):
+    cars_list.append([car, (0,0), False])
+
+
+print (cars_list)
