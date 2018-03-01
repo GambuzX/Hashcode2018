@@ -1,6 +1,6 @@
 from operator import itemgetter
 
-input_file = open('b_should_be_easy.in')
+input_file = open('c_no_hurry.in')
 first_line = input_file.readline()
 
 n_rows, n_columns, n_vehicles, n_rides, bonus, max_steps = tuple(map(int, first_line.split(' ')))
@@ -131,3 +131,15 @@ for i in range(0, max_steps):
 
         AssignNextTrip(car, tripNumber, start, finish)  # adicionar viagem, alterar valores dentro do carro
     UpdateSteps()
+
+
+output=open(".out", "w+")
+length = len(output_file)
+for i in range(length):
+    del output_file[i][0]
+print(output_file)
+for i in range(length):
+    list_length = len(output_file[i])
+    #output.write(' '.join(str(x) for x in output_file[i]) + "\n")
+    output.write(str(list_length))
+    output.write(' ' + ' '.join(str(x) for x in output_file[i]) + "\n")

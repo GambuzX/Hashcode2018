@@ -1,6 +1,6 @@
 from operator import itemgetter
 
-input_file = open('b_should_be_easy.in')
+input_file = open('d_metrolopis.in')
 first_line = input_file.readline()
 
 n_rows, n_columns, n_vehicles, n_rides, bonus, max_steps = tuple(map(int, first_line.split(' ')))
@@ -112,3 +112,10 @@ while(availableCar() != "false"): #Verifies there is a car available
 
 print(output_file)
 print(cars_list)
+
+output=open(".out", "w+")
+length = len(output_file)
+
+for i in range(length):
+    #output.write(' '.join(str(x) for x in output_file[i]) + "\n")
+    output.write(+ ' '+ str(output_file[i][1:]) + "\n")
