@@ -1,3 +1,5 @@
+from operator import itemgetter
+
 input_file = open('b_should_be_easy.in')
 first_line = input_file.readline()
 
@@ -19,6 +21,10 @@ def make_trip_list():
         trips.append([i] + input_file.readline().rstrip().split())
         # trips.append(str(i) + ' ' + input_file.readline().rstrip())
         # trip_list.append(''.join(str(x) for x in input_file.readline().rstrip()))
+
+    for i in range(n_rides):
+        # trips[i] = [int(x) for x in trips[i] if x.isnumber()]
+        trips[i][1:7] = map(int, trips[i][1:7])
     return trips
 
 
@@ -34,8 +40,11 @@ print(trip_list)
 fleet = []
 cars_list = []
 
-for car in range(n_vehicles): #Inicializa a array de carros, todos na posicao (0,0) com valor false
+for car in range(n_vehicles):  # Inicializa a array de carros, todos na posicao (0,0) com valor false
     cars_list.append([car, (0, 0), False])
+
+# sorted(trip_list, key=itemgetter(1))
+trip_list.sort(key=itemgetter(5))
 
 for r in range(n_rides):
     current_step = 0
@@ -54,8 +63,6 @@ for r in range(n_rides):
 
     print(begin, end)
 
-
-
     # while current_step < max_steps:
     #     distance = travel_distance(begin, end)
     #
@@ -64,11 +71,8 @@ for r in range(n_rides):
     #     else:
     #         begin[1] += 1
 
-        # if travel_distance(begin, end) == greatest_distance():
+    # if travel_distance(begin, end) == greatest_distance():
 
-
-        # current_step += 1
-
-
+    # current_step += 1
 
 print(trip_list)
