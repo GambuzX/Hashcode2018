@@ -16,7 +16,8 @@ def make_trip_list():
     trips = list()
 
     for i in range(n_rides):
-        trips.append(str(i) + ' ' + input_file.readline().rstrip())
+        trips.append([i] + input_file.readline().rstrip().split())
+        # trips.append(str(i) + ' ' + input_file.readline().rstrip())
         # trip_list.append(''.join(str(x) for x in input_file.readline().rstrip()))
     return trips
 
@@ -34,10 +35,20 @@ fleet = []
 
 for r in range(n_rides):
     current_step = 0
-    trip_id, begin_row, begin_col, end_row, end_col, earliest_start, latest_finish = tuple(map(int, trip_list[r].split(' ')))
+    # trip_id, begin_row, begin_col, end_row, end_col, earliest_start, latest_finish = tuple(map(int, trip_list[r].split(' ')))
 
-    begin = (begin_row, begin_col)
-    end = (end_row, end_col)
+    trip_id = trip_list[r][0]
+    begin_row = trip_list[r][1]
+    begin_col = trip_list[r][2]
+    end_row = trip_list[r][3]
+    end_col = trip_list[r][4]
+    earliest_start = trip_list[r][5]
+    latest_finish = trip_list[r][6]
+
+    begin = (int(begin_row), int(begin_col))
+    end = (int(end_row), int(end_col))
+
+    print(begin, end)
 
 
 
