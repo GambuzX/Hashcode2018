@@ -3,11 +3,6 @@ first_line = input_file.readline()
 
 n_rows, n_columns, n_vehicles, n_rides, bonus, max_steps = tuple(map(int, first_line.split(' ')))
 
-grid = []
-
-for r in range(n_rows):
-    grid.append(input_file.readline().rstrip())
-
 
 def greatest_distance():
     return n_columns * n_rows
@@ -16,6 +11,27 @@ def greatest_distance():
 def travel_distance(start, finish):
     return abs(start[0] - finish[0]) + abs(start[1] - finish[1])
 
+
+def make_trip_list():
+    trip_list = list()
+
+    for i in range(n_rides):
+        trip_list.append(str(i) + ' ' + input_file.readline().rstrip())
+        # trip_list.append(''.join(str(x) for x in input_file.readline().rstrip()))
+    return trip_list
+
+
+print(make_trip_list())
+
+grid = []
+
+for r in range(n_rows):
+    grid.append(input_file.readline().rstrip())
+
+print(grid)
+
+n_cars = 0
+fleet = []
 
 for r in range(n_rides):
     current_step = 0
@@ -33,7 +49,7 @@ for r in range(n_rides):
             begin[1] += 1
 
         # if travel_distance(begin, end) == greatest_distance():
-            
+
 
         current_step += 1
 
