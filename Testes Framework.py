@@ -27,6 +27,27 @@ def make_trip_list():
         trips[i][1:7] = map(int, trips[i][1:7])
     return trips
 
+def availableCar():
+    for car in cars_list:
+        if (car[2] == False):
+            return car[0]
+    return "false"
+
+def AssignNextTrip(carNumber, tripNumber):
+    for car in cars_list:
+        if(car[0] == carNumber):
+            car[2] = True;
+            for line in output_file: #escrever no ficheiro de output o tripNumber
+                if (line[0] == carNumber):
+                    line.append(tripNumber)
+                    return
+            return
+
+def NextTripNumber(trips):
+    nextTrip = trips[0][0]
+    del trips[0]
+    return nextTrip
+
 
 # print(make_trip_list())
 trip_list = make_trip_list()
@@ -39,9 +60,13 @@ print(trip_list)
 # n_cars = 0
 fleet = []
 cars_list = []
+output_file = []
 
 for car in range(n_vehicles):  # Inicializa a array de carros, todos na posicao (0,0) com valor false
     cars_list.append([car, (0, 0), False])
+
+for car in range(n_vehicles):  # Inicializa o output file
+    output_file.append([car])
 
 # sorted(trip_list, key=itemgetter(1))
 trip_list.sort(key=itemgetter(5))
@@ -76,3 +101,14 @@ for r in range(n_rides):
     # current_step += 1
 
 print(trip_list)
+
+while(availableCar() != "false"): #Verifies there is a car available
+    car = availableCar()
+    tripNumber = NextTripNumber(trip_list)
+    AssignNextTrip(car, tripNumber) #adicionar viagem, alterar valores dentro do carro
+    tripNumber += 1
+
+
+
+print(output_file)
+print(cars_list)

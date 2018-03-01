@@ -24,7 +24,6 @@ def AssignNextTrip(carNumber, tripNumber):
 def NextTripNumber(trips):
     return trips.pop[0]
 
-tripNumber = 0
 while(availableCar() != "false"): #Verifies there is a car available
     car = availableCar()
     tripNumber = NextTripNumber(trips)
