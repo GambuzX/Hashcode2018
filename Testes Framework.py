@@ -1,3 +1,5 @@
+from operator import itemgetter
+
 input_file = open('b_should_be_easy.in')
 first_line = input_file.readline()
 
@@ -16,8 +18,13 @@ def make_trip_list():
     trips = list()
 
     for i in range(n_rides):
-        trips.append(str(i) + ' ' + input_file.readline().rstrip())
+        trips.append([i] + input_file.readline().rstrip().split())
+        # trips.append(str(i) + ' ' + input_file.readline().rstrip())
         # trip_list.append(''.join(str(x) for x in input_file.readline().rstrip()))
+
+    for i in range(n_rides):
+        # trips[i] = [int(x) for x in trips[i] if x.isnumber()]
+        trips[i][1:7] = map(int, trips[i][1:7])
     return trips
 
 
@@ -33,17 +40,28 @@ print(trip_list)
 fleet = []
 cars_list = []
 
-for car in range(n_vehicles): #Inicializa a array de carros, todos na posicao (0,0) com valor false
+for car in range(n_vehicles):  # Inicializa a array de carros, todos na posicao (0,0) com valor false
     cars_list.append([car, (0, 0), False])
+
+# sorted(trip_list, key=itemgetter(1))
+trip_list.sort(key=itemgetter(5))
 
 for r in range(n_rides):
     current_step = 0
-    trip_id, begin_row, begin_col, end_row, end_col, earliest_start, latest_finish = tuple(map(int, trip_list[r].split(' ')))
+    # trip_id, begin_row, begin_col, end_row, end_col, earliest_start, latest_finish = tuple(map(int, trip_list[r].split(' ')))
 
-    begin = (begin_row, begin_col)
-    end = (end_row, end_col)
+    trip_id = trip_list[r][0]
+    begin_row = trip_list[r][1]
+    begin_col = trip_list[r][2]
+    end_row = trip_list[r][3]
+    end_col = trip_list[r][4]
+    earliest_start = trip_list[r][5]
+    latest_finish = trip_list[r][6]
 
+    begin = (int(begin_row), int(begin_col))
+    end = (int(end_row), int(end_col))
 
+    print(begin, end)
 
     # while current_step < max_steps:
     #     distance = travel_distance(begin, end)
@@ -53,11 +71,8 @@ for r in range(n_rides):
     #     else:
     #         begin[1] += 1
 
-        # if travel_distance(begin, end) == greatest_distance():
+    # if travel_distance(begin, end) == greatest_distance():
 
-
-        # current_step += 1
-
-
+    # current_step += 1
 
 print(trip_list)
