@@ -33,16 +33,9 @@ def availableCar():
             return car[0]
     return "false"
 
-def AssignNextTrip(carNumber, tripNumber):
+def AssignNextTrip(carNumber, tripNumber, start, finish):
     for car in cars_list:
         if(car[0] == carNumber):
-            start = 0
-            finish = 0
-
-            for trip in range(0, trip_list):
-                if (trip[0] == tripNumber):
-                    start = (trip[1],trip[2])
-                    finish = (trip[3],trip[4])
 
             car[2] = True;
             car[1] = travel_distance(start, finish)
@@ -54,22 +47,24 @@ def AssignNextTrip(carNumber, tripNumber):
                     return
             return
 
-def NextTripNumber(trips):
-    nextTrip = trips[0][0]
-    del trips[0]
-    return nextTrip
+def NextTrip(trips):
+    if (len(trips) != 0):
+        nextTrip = trips[0]
+        del trips[0]
+        return nextTrip
+    else:
+        return False
 
 
 def UpdateSteps():
-    for car in range(0,cars_list):
+    for car in cars_list:
         if(car[2] == True): #se a andar diminui steps
             car[1] -= 1
-        if(car[1] == 0): #se steps a 0 coloca a falso
+        if(car[1] <= 0): #se steps a 0 coloca a falso
             car[2] = False
 
 # print(make_trip_list())
 trip_list = make_trip_list()
-print(trip_list)
 # for r in range(n_rows):
 #     trip_list.append(input_file.readline().rstrip())
 #
@@ -118,24 +113,21 @@ for r in range(n_rides):
 
     # current_step += 1
 
-print(trip_list)
-
-while(availableCar() != "false"): #Verifies there is a car available
-    car = availableCar()
-    tripNumber = NextTripNumber(trip_list)
-    AssignNextTrip(car, tripNumber) #adicionar viagem, alterar valores dentro do carro
-    tripNumber += 1
+# while(availableCar() != "false"): #Verifies there is a car available
+#     car = availableCar()
+#     tripNumber = NextTripNumber(trip_list)
+#     AssignNextTrip(car, tripNumber) #adicionar viagem, alterar valores dentro do carro
+#     tripNumber += 1
 
 
 for i in range(0, max_steps):
-    while (availableCar() != "false"):  # Verifies there is a car available
+    while (availableCar() != "false" and NextTrip(trip_list) != False):  # Verifies there is a car available
         car = availableCar()
-        tripNumber = NextTripNumber(trip_list)
-        AssignNextTrip(car, tripNumber)  # adicionar viagem, alterar valores dentro do carro
-        tripNumber += 1
+        nextTrip = NextTrip(trip_list)
 
+        tripNumber = nextTrip[0]
+        start = (nextTrip[1],nextTrip[2])
+        finish = (nextTrip[3],nextTrip[4])
+
+        AssignNextTrip(car, tripNumber, start, finish)  # adicionar viagem, alterar valores dentro do carro
     UpdateSteps()
-
-print(output_file)
-print(cars_list)
-
