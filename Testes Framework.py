@@ -32,6 +32,10 @@ print(trip_list)
 
 # n_cars = 0
 fleet = []
+cars_list = []
+
+for car in range(n_vehicles): #Inicializa a array de carros, todos na posicao (0,0) com valor false
+    cars_list.append([car, (0, 0), False])
 
 for r in range(n_rides):
     current_step = 0
