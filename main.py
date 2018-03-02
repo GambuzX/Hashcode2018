@@ -1,8 +1,8 @@
-from operator import itemgetter
+from operator import itemgetter     #Needed funcion to sort all scheduled trips
 
-input_file = open('c_no_hurry.in')
+input_file = open('c_no_hurry.in')  #File to open
 first_line = input_file.readline()
-
+#Gets the first information from the file 
 n_rows, n_columns, n_vehicles, n_rides, bonus, max_steps = tuple(map(int, first_line.split(' ')))
 
 
@@ -14,7 +14,8 @@ def travel_distance(start, finish):
     return abs(start[0] - finish[0]) + abs(start[1] - finish[1])
 
 
-def make_trip_list():
+def make_trip_list():           #First Output with all variables as integers
+                                # adding a number to name that scheduled trip
     trips = list()
 
     for i in range(n_rides):
@@ -27,14 +28,14 @@ def make_trip_list():
         trips[i][1:7] = map(int, trips[i][1:7])
     return trips
 
-def availableCar():
+def availableCar():                 #Checking if there is a car available
     for car in cars_list:
         if (car[2] == False):
             return car[0]
     return "false"
 
 def AssignNextTrip(carNumber, tripNumber, start, finish):
-    for car in cars_list:
+    for car in cars_list:               #Assigns next trip
         if(car[0] == carNumber):
 
             car[2] = True;
@@ -47,7 +48,7 @@ def AssignNextTrip(carNumber, tripNumber, start, finish):
                     return
             return
 
-def NextTrip(trips):
+def NextTrip(trips):            #Gets the next scheduled trip and deletes it from the array
     if (len(trips) != 0):
         nextTrip = trips[0]
         del trips[0]
@@ -58,9 +59,9 @@ def NextTrip(trips):
 
 def UpdateSteps():
     for car in cars_list:
-        if(car[2] == True): #se a andar diminui steps
+        if(car[2] == True): #If it moves, it decrements its steps
             car[1] -= 1
-        if(car[1] <= 0): #se steps a 0 coloca a falso
+        if(car[1] <= 0): #If steps=0, signifies that there is a car available for the next trip
             car[2] = False
 
 # print(make_trip_list())
@@ -75,14 +76,14 @@ fleet = []
 cars_list = []
 output_file = []
 
-for car in range(n_vehicles):  # Inicializa a array de carros, todos na posicao (0,0) com valor false
-    cars_list.append([car, 0, False, (0,0)]) #numero carro, steps until available, disponibilidade
+for car in range(n_vehicles):  # Initializes an array of all the cars in the position (0,0), with the value false
+    cars_list.append([car, 0, False, (0,0)]) #Car number, steps until available, Availability
 
-for car in range(n_vehicles):  # Inicializa o output file
+for car in range(n_vehicles):  # Initializes output array
     output_file.append([car])
 
 # sorted(trip_list, key=itemgetter(1))
-trip_list.sort(key=itemgetter(5))
+trip_list.sort(key=itemgetter(5))   #Sorts Array by order of scheduling
 
 for r in range(n_rides):
     current_step = 0
@@ -129,17 +130,17 @@ for i in range(0, max_steps):
         start = (nextTrip[1],nextTrip[2])
         finish = (nextTrip[3],nextTrip[4])
 
-        AssignNextTrip(car, tripNumber, start, finish)  # adicionar viagem, alterar valores dentro do carro
+        AssignNextTrip(car, tripNumber, start, finish)  # Adds trip, alters values inside the car
     UpdateSteps()
 
-
+#Initializing output file
 output=open(".out", "w+")
 length = len(output_file)
 for i in range(length):
-    del output_file[i][0]
+    del output_file[i][0]       #Deletes the numbering of the car
 print(output_file)
 for i in range(length):
     list_length = len(output_file[i])
     #output.write(' '.join(str(x) for x in output_file[i]) + "\n")
     output.write(str(list_length))
-    output.write(' ' + ' '.join(str(x) for x in output_file[i]) + "\n")
+    output.write(' ' + ' '.join(str(x) for x in output_file[i]) + "\n")     #Creates file according to instructions
