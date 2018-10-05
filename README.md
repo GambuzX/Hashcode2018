@@ -1,4 +1,4 @@
-# Hashcode2018
+# Hashcode2018 :hash:
 
 Code developed during the 2018 Google Hashcode competition.
 
