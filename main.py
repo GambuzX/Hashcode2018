@@ -6,6 +6,7 @@ first_line = input_file.readline()
 n_rows, n_columns, n_vehicles, n_rides, bonus, max_steps = tuple(map(int, first_line.split(' ')))
 
 
+
 def greatest_distance():
     return n_columns * n_rows
 
